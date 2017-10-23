@@ -7,7 +7,7 @@ npm install events-imitator
 ```
 
 ## Usage
-### tl:dr
+### tl;dr
 ```javascript
 import Emitator from 'events-imitator'
 
