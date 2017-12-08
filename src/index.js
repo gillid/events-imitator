@@ -2,9 +2,11 @@
 
 import Event from './Event'
 
-const Emitator = {
+class Emitator {
 
-    register: {},
+    constructor() {
+        this.register = {}
+    }
 
     /**
      * Initialize Emitator lib
@@ -20,10 +22,7 @@ const Emitator = {
             // default options
 
         }, options)
-
-        // mark Emitator inited
-        this.inited = true
-    },
+    }
 
     /**
      *
@@ -41,7 +40,7 @@ const Emitator = {
         }
 
         this.register[eventName].set(consequence, consequenceName)
-    },
+    }
 
     /**
      *
@@ -53,7 +52,7 @@ const Emitator = {
         if(this.checkEventRegistered(eventName)) {
             return this.register[eventName]
         }
-    },
+    }
 
     /**
      *
@@ -70,13 +69,13 @@ const Emitator = {
         else {
             this.register[eventName].emit(consequenceName)
         }
-    },
+    }
 
     checkOptions(options) {
         if(typeof options !== 'object') {
             throw 'Exception. Emitator.init(): Type of `options` should be `object`. `' + (typeof options) + '` given.'
         }
-    },
+    }
 
     checkEventName(eventName, f = 'set') {
         if(typeof eventName !== 'string') {
@@ -85,13 +84,13 @@ const Emitator = {
         if(eventName.length === 0) {
             throw 'Exception. Emitator.' + f + '(): Empty `eventName`'
         }
-    },
+    }
 
     checkConsequence(consequence, f = 'set') {
         if(typeof consequence !== 'function') {
             throw 'Exception. Emitator.' + f + '(): Type of `consequence` should be `functions`. `' + (typeof consequence) + '` given.'
         }
-    },
+    }
 
     checkConsequenceName(consequenceName, f = 'set') {
         if(consequenceName !== false) {
@@ -99,7 +98,7 @@ const Emitator = {
                 throw 'Exception. Emitator.' + f + '(): Type of `consequenceName` should be `string`. `' + (typeof consequenceName) + '` given.'
             }
         }
-    },
+    }
 
     checkEventRegistered(eventName, exception = true, f = 'get') {
         if(typeof this.register[eventName] === 'undefined') {
@@ -112,4 +111,4 @@ const Emitator = {
     }
 }
 
-export default Emitator
+export default new Emitator()
